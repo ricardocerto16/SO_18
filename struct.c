@@ -77,11 +77,12 @@ void printstruct(Array a){
 		printf("Nodo : %d \n", i);
 		printf("Descricao: %s\n", a->cmd[i]->descricao);
 		printf("Comando: %s\n", a->cmd[i]->comando);
-		printf("Output: %s\n\n", a->cmd[i]->output);
+		printf("Output: %s\n", a->cmd[i]->output);
+		printf("-------------------------\n\n");
 	}
 
 }
-
+/*
 int main(int argc, char *argv[]){
 	
 	int res;
@@ -101,4 +102,4 @@ int main(int argc, char *argv[]){
 	printstruct(a);
 
 	return 0;
-}
+}*/

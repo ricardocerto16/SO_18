@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 
+
 typedef struct array * Array;
 typedef struct comando * Comando;
 
