@@ -1,8 +1,3 @@
-
-//#ifndef __PARSER_H__
-//#define __PARSER_H__
-
-
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -10,11 +5,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include "headers/struct.h"
+#include "struct.c"
+#include "parser.h"
 
 
-int readlinha(int fd, char * buffer, int nbyte);
-
-
-int parser(char * filename, Array a);
-
-//#endif

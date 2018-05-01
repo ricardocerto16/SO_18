@@ -41,7 +41,7 @@ Array initArray(int size){
 
 // devolver o numero de valores usados?
 // para facilitar a inserção
-int insertArray(Array a, char * descricao, char * comando){
+int insertArray(Array a, char * descricao, char * comando, int depends){
 	if( a->used == a->size){
 		a->cmd = realloc(a->cmd,2*(a->size)*sizeof(Comando));
 		a->size = (a->size)*2;
@@ -50,6 +50,7 @@ int insertArray(Array a, char * descricao, char * comando){
 	a->cmd[a->used] = cmd;
 	strcpy(a->cmd[a->used]->descricao,descricao); 
 	strcpy(a->cmd[a->used]->comando,comando);
+	a->cmd[a->used]->dependencia = depends;
 	(a->used)++;
 	return 1;  
 }
@@ -78,6 +79,7 @@ void printstruct(Array a){
 		printf("Descricao: %s\n", a->cmd[i]->descricao);
 		printf("Comando: %s\n", a->cmd[i]->comando);
 		printf("Output: %s\n", a->cmd[i]->output);
+		printf("Dependencia: %d\n", a->cmd[i]->dependencia);
 		printf("-------------------------\n\n");
 	}
 

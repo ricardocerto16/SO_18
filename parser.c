@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include "headers/struct.h"
-#include "headers/struct.c"
+#include "struct.c"
 
 
 
@@ -47,8 +47,13 @@ int parser(char * filename, Array a){
 	
 		//printf("Buffer: %s\n", buffer);
 		
-		if(buffer[0] == '$'){
+		if (buffer[0] == '$' && buffer[1] == '|'){
 			strcpy(cmd,buffer);
+			depends++;
+		}
+		else if(buffer[0] == '$'){
+			strcpy(cmd,buffer);
+			depends = 0;
 			//printf("cmd %s\n", cmd);
 		}
 		else {
@@ -59,7 +64,7 @@ int parser(char * filename, Array a){
 		if( (strcmp(desc,"") !=0) && (strcmp(cmd,"") != 0)) {
 			//printf("desc -> %s\n", desc);
 			//printf("cmd -> %s\n", cmd);
-		    insertArray(a,desc,cmd);
+		    insertArray(a,desc,cmd,depends);
 			strcpy(desc,"");
 			strcpy(cmd,"");
 		}
