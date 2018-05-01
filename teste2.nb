@@ -1,0 +1,4 @@
+Este comando lista os ficheiros
+$ ls
+Este comando indica a diretoria onde estamos
+$ wc
