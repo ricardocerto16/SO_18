@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <ctype.h>
 #include <sys/types.h>
 #include "headers/struct.h"
 #include "struct.c"
@@ -31,12 +32,15 @@ int parser(char * filename, Array a){
 
 	int fd, rd , n , x;
 	char buffer[512];
-	char str[512];
-	char * token;
+	char aux[512];
 	fd = open(filename,O_RDONLY);
 	char cmd[128] = "";
 	char desc[512] = "";
 	int depends = 0;
+	char *dep[5];
+	char num[20] = "";
+	int i;
+	char * string;
 
 	if (fd < 0) {
 		perror("Erro a abrir o ficheiro");
@@ -45,17 +49,27 @@ int parser(char * filename, Array a){
 
 	while((n = readlinha(fd,buffer,1000)) > 0) {
 	
-		//printf("Buffer: %s\n", buffer);
-		
+
+		// remover valores dependencia de um comando
+
 		if (buffer[0] == '$' && buffer[1] == '|'){
 			strcpy(cmd,buffer);
 			depends++;
 		}
-		else if(buffer[0] == '$'){
-			strcpy(cmd,buffer);
-			depends = 0;
-			//printf("cmd %s\n", cmd);
+		else if(buffer[0] == '$' && buffer[1] == ' '){
+				strcpy(cmd,buffer);
+				depends = 0;
 		}
+		else if(buffer[0] == '$'){
+			i = 1;
+			while(isdigit(buffer[i])){
+				strcat(num,&buffer[i]);
+				i++;
+			}
+			strcpy(cmd,buffer);
+			depends = atoi(num);
+			//printf("cmd %s\n", cmd);
+			}
 		else {
 			strcpy(desc,buffer);
 			//printf("desc %s\n", desc);
@@ -69,7 +83,6 @@ int parser(char * filename, Array a){
 			strcpy(cmd,"");
 		}
 	}
-
 
 	close(fd);
 
