@@ -54,7 +54,7 @@ int parser(char * filename, Array a){
 
 		if (buffer[0] == '$' && buffer[1] == '|'){
 			strcpy(cmd,buffer);
-			depends++;
+			depends = 1;
 		}
 		else if(buffer[0] == '$' && buffer[1] == ' '){
 				strcpy(cmd,buffer);
@@ -68,16 +68,12 @@ int parser(char * filename, Array a){
 			}
 			strcpy(cmd,buffer);
 			depends = atoi(num);
-			//printf("cmd %s\n", cmd);
 			}
 		else {
 			strcpy(desc,buffer);
-			//printf("desc %s\n", desc);
 		}
 
 		if( (strcmp(desc,"") !=0) && (strcmp(cmd,"") != 0)) {
-			//printf("desc -> %s\n", desc);
-			//printf("cmd -> %s\n", cmd);
 		    insertArray(a,desc,cmd,depends);
 			strcpy(desc,"");
 			strcpy(cmd,"");
