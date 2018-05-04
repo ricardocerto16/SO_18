@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/types.h>
-#include "headers/struct.h"
+#include "struct.h"
 
 
 int readlinha(int fd, char * buffer, int nbyte);

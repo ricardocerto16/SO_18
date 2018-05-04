@@ -1,0 +1,11 @@
+descricao
+ls -l
+>>>
+make.c 
+ x.c
+<<<
+cmd 2
+ls
+>>>
+ls -l
+<<<

@@ -5,8 +5,8 @@
 #include <fcntl.h>
 #include <ctype.h>
 #include <sys/types.h>
-#include "headers/struct.h"
-#include "struct.c"
+#include "headers/parser.h"
+
 
 
 
@@ -48,9 +48,7 @@ int parser(char * filename, Array a){
 	}
 
 	while((n = readlinha(fd,buffer,1000)) > 0) {
-	
 
-		// remover valores dependencia de um comando
 
 		if (buffer[0] == '$' && buffer[1] == '|'){
 			strcpy(cmd,buffer);
@@ -82,6 +80,7 @@ int parser(char * filename, Array a){
 
 	close(fd);
 
+	return 0;
 }
 
 
