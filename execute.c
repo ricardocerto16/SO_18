@@ -1,6 +1,6 @@
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
 #include <stdio.h>
 #include <sys/wait.h>
 #include <fcntl.h>
@@ -50,51 +50,46 @@ char ** argsexecution(char **args, char * comando){
 
 int execut(Array a){
 
-	int i = 0 , f, execution;
+	int i = 0 , f;
 	int tam = a->used;
-	Comando comaux;
-	char ** exec_args;
-	char * coma;
+	char ** exec_args = (char**) malloc(tam*sizeof(char *));
 	int fd[2];
 	int n;
-	char * buffer;
+	char * buffer = (char *) malloc(2048 * sizeof(char));
 
-	pipe(fd);
 
 	while(i < tam){
+		printf("%d - %d\n",i, tam);
+		pipe(fd);
 		f = fork();
 		if (f == 0) {
 
 			exec_args = argsexecution(exec_args,a->cmd[i]->comando);
 			i++;
-			close(fd[1]);
-			dup2(fd[0],0);
 			close(fd[0]);
+			dup2(fd[1],1);
+			close(fd[1]);
 
-			printf("0 -> %s\n", exec_args[0]);
-
-			execution = execvp(exec_args[0],exec_args);
-			_exit(execution);
+			
+			execvp(exec_args[0],exec_args);
+			printf("%d\n", 33);
+			_exit(1);
 		}
 		else{
-			// ver como o pai vai buscar o output do filho e o guarda na estrutura
-			//close(fd[1]);
-		
-			close(fd[0]);
-			//dup2(fd[1],1);
-			wait(NULL);
+			 close(fd[1]);
+			 wait(NULL);
+			 int tama =0;
+			 while((n = read(fd[0],buffer,1024)) > 0){
+				printf("bytes lidos %d\n", n);
+				tama +=n;
+			 }
+			 buffer[tama-1]='\0';
 			
-			while(n = read(fd[0],buffer,strlen(buffer)) > 0){
-				printf("buffer |%s|\n", buffer);
-			}
-	
-	  		strcpy(buffer,"");
-			close(fd[1]);
-
-			i++;
-
+			
+			 insertArrayOutput(a,i,buffer);
+	  		 //strcpy(buffer,"");
+			 i++;
 		}
-
 
 	}
 
@@ -111,7 +106,7 @@ int main(int argc, char *argv[]){
 	char des11[50] = "cmd 2";
 	char cmds[50] = "$ pwd";
 	char cmd1[50] = "$ ls -l";
-	char out[50] = "make.c \n x.c";
+	//char out[50] = "make.c \n x.c";
 
 	res = insertArray(a,des,cmds,0);
 	//res = insertArrayOutput(a,0,out);	
@@ -120,13 +115,13 @@ int main(int argc, char *argv[]){
 	
 
 
-	char * exec_args[20];
-	char coma[128] = "$| ls -l";
+	//char * exec_args[20];
+	//char coma[128] = "$| ls -l";
 
 	//argsexecution(exec_args,coma);
 
 	int r = execut(a);
-
+	printstruct(a);
 	//limpaEspacos(coma);
-	return 0;
+	return 1;
 }
