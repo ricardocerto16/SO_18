@@ -1,19 +1,19 @@
-#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <sys/types.h>
-#include "headers/struct.h"
+//#include "headers/struct.h"
 #include "struct.c"
 //#include "headers/parser.h"
-#include "parser.c"
+//#include "parser.c"
 
 void limpaEspacos(char * t){
     int i, j=0;
     for(i=0;t[i]!='\0';i++){
-        if(t[i]==' ' || t[i] == '\n');
+        if(t[i]==' ');
         else { t[j] = t[i]; 
         	   j++;}
     }
@@ -50,44 +50,53 @@ char ** argsexecution(char **args, char * comando){
 
 int execut(Array a){
 
-	int i = 0 , f;
+	int i = 0 , f, execution;
 	int tam = a->used;
-	char ** exec_args = (char**) malloc(tam*sizeof(char *));
+	Comando comaux;
+	char ** exec_args;
+	char * coma;
 	int fd[2];
 	int n;
-	char * buffer = (char *) malloc(2048 * sizeof(char));
+	char * buffer;
 
+	pipe(fd);
 
 	while(i < tam){
-		printf("%d - %d\n",i, tam);
-		pipe(fd);
 		f = fork();
 		if (f == 0) {
 
 			exec_args = argsexecution(exec_args,a->cmd[i]->comando);
-			close(fd[0]);
-			dup2(fd[1],1);
-			close(fd[1]);
 			i++;
-			
-			execvp(exec_args[0],exec_args);
-			_exit(1);
+			close(fd[1]);
+			dup2(fd[0],0);
+			close(fd[0]);
+
+			printf("0 -> %s\n", exec_args[0]);
+
+			execution = execvp(exec_args[0],exec_args);
+			_exit(execution);
 		}
 		else{
-			 close(fd[1]);
-			 wait(NULL);
-			 int tama =0;
-			 while((n = read(fd[0],buffer,2048)) > 0){
-				//printf("bytes lidos %d\n", n);
-				tama +=n;
-			 }
-			 buffer[tama-1]='\0';
+			// ver como o pai vai buscar o output do filho e o guarda na estrutura
+			//close(fd[1]);
+		
+			close(fd[0]);
+			//dup2(fd[1],1);
+			wait(NULL);
 			
-			 //printf("Buffer %d -> %s\n",i, buffer);
-			 insertArrayOutput(a,i,buffer);
-	  		 //strcpy(buffer,"");
-			 i++;
+			while(n = read(fd[0],buffer,strlen(buffer)) > 0){
+				printf("%d\n",n);
+				write(fd[1],buffer,n);
+				printf("buffer |%s|\n", buffer);
+			}
+	
+	  		strcpy(buffer,"");
+			close(fd[1]);
+
+			i++;
+
 		}
+
 
 	}
 
@@ -98,30 +107,28 @@ int execut(Array a){
 
 int main(int argc, char *argv[]){
 
-	//int res;
-	int x;
+	int res;
 	Array a = initArray(5);
-	//char des[50] = "descricao";
-	//char des11[50] = "cmd 2";
-	//char cmds[50] = "$ pwd";
-	//char cmd1[50] = "$ ls -l";
-	//char out[50] = "make.c \n x.c";
+	char des[50] = "descricao";
+	char des11[50] = "cmd 2";
+	char cmds[50] = "$ pwd";
+	char cmd1[50] = "$ ls -l";
+	char out[50] = "make.c \n x.c";
 
-	//res = insertArray(a,des,cmds,0);
+	res = insertArray(a,des,cmds,0);
 	//res = insertArrayOutput(a,0,out);	
-	//res = insertArray(a,des11,cmd1,0);
+	res = insertArray(a,des11,cmd1,0);
 	//res = insertArrayOutput(a,1,cmds);
 	
-	x = parser("teste2.nb",a);
-	//printstruct(a);
 
-	//char * exec_args[20];
-	//char coma[128] = "$| ls -l";
+
+	char * exec_args[20];
+	char coma[128] = "$| ls -l";
 
 	//argsexecution(exec_args,coma);
 
 	int r = execut(a);
-	printstruct(a);
+
 	//limpaEspacos(coma);
-	return 1;
+	return 0;
 }

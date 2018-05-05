@@ -30,17 +30,15 @@ int readlinha(int fd, char * buffer, int nbyte){
 
 int parser(char * filename, Array a){
 
-	int fd, rd , n , x;
+	int fd, n;
 	char buffer[512];
-	char aux[512];
 	fd = open(filename,O_RDONLY);
 	char cmd[128] = "";
 	char desc[512] = "";
 	int depends = 0;
-	char *dep[5];
 	char num[20] = "";
 	int i;
-	char * string;
+
 
 	if (fd < 0) {
 		perror("Erro a abrir o ficheiro");
@@ -83,7 +81,7 @@ int parser(char * filename, Array a){
 	return 0;
 }
 
-
+/*
 int main(int argc, char *argv[]){
 	
 	int x;
@@ -93,3 +91,4 @@ int main(int argc, char *argv[]){
 
 	return 0;
 }
+*/
