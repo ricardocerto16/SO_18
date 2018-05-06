@@ -1,7 +1,7 @@
 CC = gcc
 
-parser: parser.c struct.c
-	$(CC) parser.c struct.c -o parser
+execute: writenfile.c execute.c parser.c struct.c
+	$(CC) writenfile.c execute.c parser.c struct.c -o program
 
 clean:
-	rm parser
+	rm program

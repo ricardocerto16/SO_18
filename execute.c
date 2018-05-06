@@ -1,14 +1,5 @@
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/wait.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include "headers/struct.h"
-#include "struct.c"
-//#include "headers/parser.h"
-#include "parser.c"
+#include "headers/execute.h"
+
 
 void limpaEspacos(char * t){
     int i, j=0;
@@ -51,7 +42,7 @@ char ** argsexecution(char **args, char * comando){
 int execut(Array a){
 
 	int i = 0 , f;
-	int tam = a->used;
+	int tam = getUsed(a);
 	char ** exec_args = (char**) malloc(tam*sizeof(char *));
 	int fd[2];
 	int n;
@@ -64,7 +55,7 @@ int execut(Array a){
 		f = fork();
 		if (f == 0) {
 
-			exec_args = argsexecution(exec_args,a->cmd[i]->comando);
+			exec_args = argsexecution(exec_args,getComando(a,i));
 			close(fd[0]);
 			dup2(fd[1],1);
 			close(fd[1]);
@@ -95,33 +86,17 @@ int execut(Array a){
 	return 0;
 }
 
-
+/*
 int main(int argc, char *argv[]){
 
-	//int res;
 	int x;
 	Array a = initArray(5);
-	//char des[50] = "descricao";
-	//char des11[50] = "cmd 2";
-	//char cmds[50] = "$ pwd";
-	//char cmd1[50] = "$ ls -l";
-	//char out[50] = "make.c \n x.c";
-
-	//res = insertArray(a,des,cmds,0);
-	//res = insertArrayOutput(a,0,out);	
-	//res = insertArray(a,des11,cmd1,0);
-	//res = insertArrayOutput(a,1,cmds);
 	
 	x = parser("teste2.nb",a);
 	//printstruct(a);
 
-	//char * exec_args[20];
-	//char coma[128] = "$| ls -l";
-
-	//argsexecution(exec_args,coma);
-
 	int r = execut(a);
 	printstruct(a);
-	//limpaEspacos(coma);
+
 	return 1;
-}
+}*/

@@ -1,6 +1,3 @@
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "headers/struct.h"
 
 
@@ -84,6 +81,32 @@ void printstruct(Array a){
 	}
 
 }
+
+
+int getUsed(Array a){
+	int use = a -> used;
+	return use;
+}
+
+char * getComando(Array a, int i){
+	char * com;
+	strcpy(com,a->cmd[i]->comando);
+	return com;
+}
+
+
+char * getDescricao(Array a, int i){
+	char * des;
+	strcpy(des,a->cmd[i]->descricao);
+	return des;
+}
+
+char * getOutput(Array a, int i){
+	char * out;
+	strcpy(out,a->cmd[i]->output);
+	return out;
+}
+
 /*
 int main(int argc, char *argv[]){
 	

@@ -1,13 +1,13 @@
-//#ifndef __STRUCT_H__
-//#define __STRUCT_H__
-
-
+#ifndef __STRUCH_H__
+#define __STRUCH_H__
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-typedef struct array * Array;
-typedef struct comando * Comando;
+
+typedef struct array *Array;
+typedef struct comando *Comando;
 
 
 Array initArray(int size);
@@ -25,4 +25,15 @@ int insertArrayOutput(Array a, int pos ,char * output);
 void printstruct(Array a);
 
 
-//#endif
+int getUsed(Array a);
+
+
+char * getComando(Array a, int i);
+
+
+char * getDescricao(Array a, int i);
+
+
+char * getOutput(Array a, int i);
+
+#endif

@@ -1,10 +1,3 @@
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <ctype.h>
-#include <sys/types.h>
 #include "headers/parser.h"
 
 
@@ -74,19 +67,19 @@ int parser(char * filename, Array a){
 			strcpy(desc,"");
 			strcpy(cmd,"");
 		}
-	}
 
+	}
+	
 	close(fd);
 
 	return 0;
 }
-
 /*
 int main(int argc, char *argv[]){
 	
 	int x;
 	Array a = initArray(5);
-	x = parser("teste1.nb",a);
+	x = parser("example.nb",a);
 	printstruct(a);
 
 	return 0;
