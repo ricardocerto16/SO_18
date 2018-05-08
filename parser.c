@@ -20,26 +20,28 @@ int readlinha(int fd, char * buffer, int nbyte){
 }
 
 
-
 int parser(char * filename, Array a){
 
 	int fd, n;
 	char buffer[512];
 	fd = open(filename,O_RDONLY);
-	char cmd[128] = "";
+	char cmd[256] = "";  
+	//(char *)malloc(512 * sizeof(char));
 	char desc[512] = "";
 	int depends = 0;
 	char num[20] = "";
 	int i;
+	int descartar = 0;
 
-
+	// devia ser verificado apenas ao abrir o ficheiro
 	if (fd < 0) {
 		perror("Erro a abrir o ficheiro");
 		return 0;
 	}
 
-	while((n = readlinha(fd,buffer,1000)) > 0) {
+	while((n = readlinha(fd,buffer,1024)) > 0) {
 
+		//printf("buff %s\n", buffer);
 
 		if (buffer[0] == '$' && buffer[1] == '|'){
 			strcpy(cmd,buffer);
@@ -59,7 +61,17 @@ int parser(char * filename, Array a){
 			depends = atoi(num);
 			}
 		else {
-			strcpy(desc,buffer);
+			if((strcmp(buffer,">>>") == 0)){
+				descartar = 1;
+			}
+			else if ((strcmp(buffer,"<<<") == 0)){
+				descartar = 0;
+				strcpy(buffer,"");
+			}
+
+			if (descartar == 0){
+				strcpy(desc,buffer);
+			}
 		}
 
 		if( (strcmp(desc,"") !=0) && (strcmp(cmd,"") != 0)) {
@@ -69,7 +81,7 @@ int parser(char * filename, Array a){
 		}
 
 	}
-	
+
 	close(fd);
 
 	return 0;
