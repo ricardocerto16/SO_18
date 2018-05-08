@@ -50,11 +50,11 @@ int execut(Array a){
 
 
 	while(i < tam){
-		printf("%d - %d\n",i, tam);
+		//printf("%d - %d\n",i, tam);
 		pipe(fd);
 		f = fork();
 		if (f == 0) {
-
+			printf("Argumentos em execução\n");
 			exec_args = argsexecution(exec_args,getComando(a,i));
 			close(fd[0]);
 			dup2(fd[1],1);

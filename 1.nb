@@ -1,2 +1,16 @@
-descricao
-$ ls 
+Faz ls 
+$ ls
+>>> 
+1.nv
+Makefile
+<<<
+Faz pwd 
+$ pwd
+>>>
+home/pi
+<<<
+Ver data
+$ date
+>>>
+Terça
+<<<
