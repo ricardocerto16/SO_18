@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
 	int r = execut(a);
 	printstruct(a);
 
-	//file_writen("1.nb",a);
+	file_writen("1.nb",a);
 	
 
 

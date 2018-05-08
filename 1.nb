@@ -1,16 +1,6 @@
-Faz ls 
+Faz ls
 $ ls
->>> 
-1.nv
-Makefile
-<<<
-Faz pwd 
+Faz pwd
 $ pwd
->>>
-home/pi
-<<<
-Ver data
+Faz data 
 $ date
->>>
-Terça
-<<<
