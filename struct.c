@@ -89,20 +89,23 @@ int getUsed(Array a){
 }
 
 char * getComando(Array a, int i){
-	char * com;
-	strcpy(com,a->cmd[i]->comando);
+	char* cmd = a->cmd[i]->comando;
+	char* com = malloc((strlen(cmd) + 1) * sizeof(char));
+	strcpy(com, a->cmd[i]->comando);
 	return com;
 }
 
 
 char * getDescricao(Array a, int i){
-	char * des;
+	char* d = a->cmd[i]->descricao;
+	char * des = malloc((strlen(d) + 1) * sizeof(char));
 	strcpy(des,a->cmd[i]->descricao);
 	return des;
 }
 
 char * getOutput(Array a, int i){
-	char * out;
+	char* o = a->cmd[i]->output;
+	char * out = malloc((strlen(o) + 1) * sizeof(char));
 	strcpy(out,a->cmd[i]->output);
 	return out;
 }

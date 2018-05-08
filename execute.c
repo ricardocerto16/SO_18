@@ -54,7 +54,7 @@ int execut(Array a){
 		pipe(fd);
 		f = fork();
 		if (f == 0) {
-			printf("Argumentos em execução\n");
+			//printf("Argumentos em execução\n");
 			exec_args = argsexecution(exec_args,getComando(a,i));
 			close(fd[0]);
 			dup2(fd[1],1);

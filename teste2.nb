@@ -1,6 +1,29 @@
 Este comando lista os ficheiros
 $ ls
+>>>
+1.nb
+enunciado-so-2017-18.pdf
+example.nb
+execute.c
+headers
+Makefile
+output.txt
+parser.c
+program
+README.md
+struct.c
+teste1.nb
+teste2.nb
+teste3.nb
+writenfile.c
+<<<
 Ver diretoria em que estamos
 $ pwd
+>>>
+/home/ricardo/Desktop/SO/SO_18
+<<<
 Data
 $ date
+>>>
+Qua Mai  9 00:15:37 WEST 2018
+<<<

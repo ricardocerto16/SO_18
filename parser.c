@@ -26,7 +26,6 @@ int parser(char * filename, Array a){
 	char buffer[512];
 	fd = open(filename,O_RDONLY);
 	char cmd[256] = "";  
-	//(char *)malloc(512 * sizeof(char));
 	char desc[512] = "";
 	int depends = 0;
 	char num[20] = "";
@@ -40,8 +39,7 @@ int parser(char * filename, Array a){
 	}
 
 	while((n = readlinha(fd,buffer,1024)) > 0) {
-
-		//printf("buff %s\n", buffer);
+		
 
 		if (buffer[0] == '$' && buffer[1] == '|'){
 			strcpy(cmd,buffer);

@@ -1,6 +1,28 @@
 Faz ls
 $ ls
+>>>
+1.nb
+example.nb
+execute.c
+headers
+Makefile
+output.txt
+parser.c
+program
+README.md
+struct.c
+teste1.nb
+teste2.nb
+teste3.nb
+writenfile.c
+<<<
 Faz pwd
 $ pwd
+>>>
+/home/ricardo/Desktop/SO_33/SO_18
+<<<
 Faz data 
 $ date
+>>>
+Ter Mai  8 23:55:25 WEST 2018
+<<<
