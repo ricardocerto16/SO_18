@@ -2,10 +2,7 @@
 #define __PARSER_H__
 
 #include <ctype.h>
-//#include <string.h>
 #include <unistd.h>
-//#include <stdlib.h>
-//#include <stdio.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include "struct.h"
