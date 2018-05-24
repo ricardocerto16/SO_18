@@ -17,7 +17,6 @@ char ** argsexecution(char **args, char * comando){
 	char * string;
 
 	string = strtok(comando," ");
-	//printf("String %s\n", string);
 
 	while(string != NULL){
 		
@@ -37,6 +36,8 @@ char ** argsexecution(char **args, char * comando){
 	return args;
 }
 
+// 0 -> leitura
+// 1 -> escrita
 
 
 int execut(Array a){
@@ -47,56 +48,103 @@ int execut(Array a){
 	int fd[2];
 	int n;
 	char * buffer = (char *) malloc(2048 * sizeof(char));
+	char * output = (char *) malloc(2048 * sizeof(char));
+	int dependencia;
+	int saida[2];
+	int status, res;
+
 
 
 	while(i < tam){
-		//printf("%d - %d\n",i, tam);
+
 		pipe(fd);
-		f = fork();
-		if (f == 0) {
-			//printf("Argumentos em execução\n");
-			exec_args = argsexecution(exec_args,getComando(a,i));
-			close(fd[0]);
-			dup2(fd[1],1);
-			close(fd[1]);
-			i++;
+		pipe(saida);
+		dependencia = getDependencia(a,i);
+
+		if( dependencia == 0) {
+
+			if (fork() == 0) {
+				exec_args = argsexecution(exec_args,getComando(a,i));
+				close(fd[0]);
+				dup2(fd[1],1);
+				close(fd[1]);
 			
-			execvp(exec_args[0],exec_args);
-			_exit(1);
-		}
-		else{
-			 close(fd[1]);
-			 wait(NULL);
-			 int tama =0;
-			 while((n = read(fd[0],buffer,2048)) > 0){
-				//printf("bytes lidos %d\n", n);
-				tama +=n;
-			 }
-			 buffer[tama-1]='\0';
+				execvp(exec_args[0],exec_args);
+				_exit(1);
+			}
+			else {
+
+				if (f < 0) { perror("Erro no fork"); return -1;}
+
+			 	close(fd[1]);
+				wait(&status);
+			 	int tama =0;
+				while((n = read(fd[0],buffer,2048)) > 0){
+					tama +=n;
+			 	}
+				buffer[tama-1]='\0';
 			
-			 //printf("Buffer %d -> %s\n",i, buffer);
-			 insertArrayOutput(a,i,buffer);
-	  		 //strcpy(buffer,"");
-			 i++;
+			 	insertArrayOutput(a,i,buffer);
+	  		 	
+			}
+			if(WIFEXITED(status)) {
+				res = WEXITSTATUS(status);
+			}
+		}
+		else if (dependencia > 0){
+			
+			if (i - dependencia < 0) { perror("Dependencia Inválida"); return 1;}
+
+
+			if( fork() == 0) {
+
+				exec_args = argsexecution(exec_args,getComando(a,i));
+
+				dup2(saida[0],0);
+				close(saida[1]);
+				close(saida[0]);
+
+				close(fd[0]);
+				dup2(fd[1],1);
+				close(fd[1]);
+
+				execvp(exec_args[0],exec_args);
+				_exit(1);
+			}
+			else {
+
+				if (f < 0) { perror("Erro no fork"); res = -1;}
+
+				close(saida[0]);
+				output = getOutput(a,(i - dependencia));
+				write(saida[1],output,strlen(output)+1);
+				close(saida[1]);
+
+
+				wait(&status);
+				close(fd[1]);
+
+
+				int tama =0;
+				while((n = read(fd[0],buffer,2048)) > 0){
+					tama +=n;
+			 	}
+				buffer[tama-1]='\0';
+
+			 	insertArrayOutput(a,i,buffer);
+
+			}
+		  }
+		 i++;
 		}
 
-	}
-
-
-	return 0;
+		if(WIFEXITED(status)) {
+				res = WEXITSTATUS(status);
+			}
+		else {
+				return -1;
+			}
+		
+	return res;
 }
 
-/*
-int main(int argc, char *argv[]){
-
-	int x;
-	Array a = initArray(5);
-	
-	x = parser("teste2.nb",a);
-	//printstruct(a);
-
-	int r = execut(a);
-	printstruct(a);
-
-	return 1;
-}*/

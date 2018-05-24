@@ -28,6 +28,9 @@ void printstruct(Array a);
 int getUsed(Array a);
 
 
+int getDependencia(Array a, int i);
+
+
 char * getComando(Array a, int i);
 
 

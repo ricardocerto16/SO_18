@@ -20,19 +20,15 @@ int file_writen(char * filename, Array a){
 	while(i < used){ 
 		printf("i: %d\nused: %d\n",i, used);
 		printf("exec ciclo\n");
-		//printf("Desc| %s\n", getDescricao(a,i));
-		//printf("Comando| %s\n", getComando(a,i));
-		//printf("Output| %s\n", getOutput(a,i));
-		//printf("---------------\n");
 
 		strcpy(desc, getDescricao(a,i));
 		n = write(fd,desc,strlen(desc));
 		if (n<0){perror("Erro write"); return 1;}
-		//n = write(fd,"\n",1);
+		
 
 		strcpy(com, getComando(a,i));
 		n = write(fd,com,strlen(com));
-		//n = write(fd,"\n",1);
+		
 
 		strcpy(out,getOutput(a,i));
 
@@ -60,18 +56,19 @@ int file_writen(char * filename, Array a){
 
 int main(int argc, char *argv[]){
 
-	//int res;
+	
 	Array a = initArray(5);
 	//printstruct(a);
 
-	parser("teste2.nb",a);
+	parser("1.nb",a);
 
 	//printstruct(a);
 
 	int r = execut(a);
+
 	printstruct(a);
 
-	file_writen("teste2.nb",a);
+	file_writen("1.nb",a);
 	
 
 

@@ -83,6 +83,10 @@ void printstruct(Array a){
 }
 
 
+int getDependencia(Array a, int i){
+	return a->cmd[i]->dependencia;
+}
+
 int getUsed(Array a){
 	int use = a -> used;
 	return use;

@@ -2,11 +2,11 @@ Faz ls
 $ ls
 >>>
 1.nb
+enunciado-so-2017-18.pdf
 example.nb
 execute.c
 headers
 Makefile
-output.txt
 parser.c
 program
 README.md
@@ -19,10 +19,16 @@ writenfile.c
 Faz pwd
 $ pwd
 >>>
-/home/ricardo/Desktop/SO_33/SO_18
+/home/ricardo/Desktop/SO/SO_18
 <<<
 Faz data 
 $ date
 >>>
-Ter Mai  8 23:55:25 WEST 2018
+Qui Mai 24 16:06:39 WEST 2018
+<<<
+Da 3
+$3| head -2
+>>>
+1.nb
+enunciado-so-2017-18.pdf
 <<<
