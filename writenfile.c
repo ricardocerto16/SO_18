@@ -18,8 +18,8 @@ int file_writen(char * filename, Array a){
 
 	int i = 0;
 	while(i < used){ 
-		printf("i: %d\nused: %d\n",i, used);
-		printf("exec ciclo\n");
+		//printf("i: %d\nused: %d\n",i, used);
+		//printf("exec ciclo\n");
 
 		strcpy(desc, getDescricao(a,i));
 		n = write(fd,desc,strlen(desc));
@@ -57,10 +57,12 @@ int file_writen(char * filename, Array a){
 int main(int argc, char *argv[]){
 
 	
+	if (argc != 2) {return -1;}
+
 	Array a = initArray(5);
 	//printstruct(a);
 
-	parser("1.nb",a);
+	parser(argv[1],a);
 
 	//printstruct(a);
 
@@ -68,7 +70,7 @@ int main(int argc, char *argv[]){
 
 	printstruct(a);
 
-	file_writen("1.nb",a);
+	file_writen(argv[1],a);
 	
 
 

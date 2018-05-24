@@ -24,7 +24,7 @@ $ pwd
 Faz data 
 $ date
 >>>
-Qui Mai 24 16:06:39 WEST 2018
+Qui Mai 24 16:18:11 WEST 2018
 <<<
 Da 3
 $3| head -2
