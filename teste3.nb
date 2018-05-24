@@ -1,2 +1,6 @@
+Faz pwd
+$ pwd
 Faz cemas 
-$ sou comando
+$3| head
+Faz data
+$ date

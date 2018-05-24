@@ -93,7 +93,7 @@ int execut(Array a){
 		}
 		else if (dependencia > 0){
 			
-			if (i - dependencia < 0) { perror("Dependencia Inválida"); return 1;}
+			if (i - dependencia < 0) { perror("Dependencia Inválida"); return -1;}
 
 
 			if( fork() == 0) {
