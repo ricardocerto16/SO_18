@@ -32,8 +32,7 @@ int file_writen(char * filename, Array a){
 
 		strcpy(out,getOutput(a,i));
 
-		// ver o caso de ls a uma pasta vazia o resultado é nulo também
-		// e tem de ser antes de abrir o ficheiro não perder o conteúdo
+
 		if( (strcmp(out,"") != 0) ){
 			n = write(fd,">>>",3);
 			n = write(fd,"\n",1);
@@ -68,11 +67,11 @@ int main(int argc, char *argv[]){
 
 	int r = execut(a);
 
-	if (r > 0){ 
-
-		printstruct(a);
+	if (r > 0){ 	
 		file_writen(argv[1],a);
 	}
+
+	printstruct(a);
 	
 
 	return 1;

@@ -87,9 +87,6 @@ int execut(Array a){
 			 	insertArrayOutput(a,i,buffer);
 	  		 	
 			}
-			if(WIFEXITED(status)) {
-				res = WEXITSTATUS(status);
-			}
 		}
 		else if (dependencia > 0){
 			
@@ -136,15 +133,15 @@ int execut(Array a){
 			}
 		  }
 		 i++;
-		}
 
-		if(WIFEXITED(status)) {
+		 if(WIFEXITED(status)) {
 				res = WEXITSTATUS(status);
 			}
-		else {
+		 else {
 				return -1;
 			}
-		
+		}
+
 	return res;
 }
 

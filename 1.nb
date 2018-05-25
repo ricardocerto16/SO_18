@@ -1,34 +1,9 @@
 Faz ls
-$ ls
->>>
-1.nb
-enunciado-so-2017-18.pdf
-example.nb
-execute.c
-headers
-Makefile
-parser.c
-program
-README.md
-struct.c
-teste1.nb
-teste2.nb
-teste3.nb
-writenfile.c
-<<<
+$ ls -l
 Faz pwd
 $ pwd
->>>
-/home/ricardo/Desktop/SO/SO_18
-<<<
 Faz data 
 $ date
->>>
-Qui Mai 24 16:18:11 WEST 2018
-<<<
 Da 3
-$3| head -2
->>>
-1.nb
-enunciado-so-2017-18.pdf
-<<<
+$3| head -3
+

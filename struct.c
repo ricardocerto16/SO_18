@@ -29,15 +29,12 @@ Array initArray(int size){
 	a -> size = size;
 	a -> used = 0;
 	a -> cmd = malloc(size * sizeof(Comando));
-	//a -> cmd = initComando();
-	//a -> cmd = malloc(size * sizeof(struct comando));
 
 	return a;
 }
 
 
-// devolver o numero de valores usados?
-// para facilitar a inserção
+
 int insertArray(Array a, char * descricao, char * comando, int depends){
 	if( a->used == a->size){
 		a->cmd = realloc(a->cmd,2*(a->size)*sizeof(Comando));
@@ -55,9 +52,7 @@ int insertArray(Array a, char * descricao, char * comando, int depends){
 
 
 int insertArrayOutput(Array a, int pos ,char * output){
-
 	strcpy(a->cmd[pos]->output,output); 
-
 	return 1;
 }
 
@@ -113,25 +108,3 @@ char * getOutput(Array a, int i){
 	strcpy(out,a->cmd[i]->output);
 	return out;
 }
-
-/*
-int main(int argc, char *argv[]){
-	
-	int res;
-	Array a = initArray(5);
-	char des[50] = "descricao";
-	char des11[50] = "cmd 2";
-	char cmds[50] = "ls -l";
-	char out[50] = "make.c \n x.c";
-
-
-	res = insertArray(a,des,cmds);
-	res = insertArrayOutput(a,0,out);
-	
-	res = insertArray(a,des11,cmds);
-	res = insertArrayOutput(a,1,cmds);
-	
-	printstruct(a);
-
-	return 0;
-}*/

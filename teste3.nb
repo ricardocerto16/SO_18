@@ -3,4 +3,4 @@ $ pwd
 Faz cemas 
 $3| head
 Faz data
-$ date
+$ lixo

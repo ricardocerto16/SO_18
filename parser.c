@@ -32,7 +32,6 @@ int parser(char * filename, Array a){
 	int i;
 	int descartar = 0;
 
-	// devia ser verificado apenas ao abrir o ficheiro
 	if (fd < 0) {
 		perror("Erro a abrir o ficheiro");
 		return 0;
@@ -84,14 +83,4 @@ int parser(char * filename, Array a){
 
 	return 0;
 }
-/*
-int main(int argc, char *argv[]){
-	
-	int x;
-	Array a = initArray(5);
-	x = parser("example.nb",a);
-	printstruct(a);
 
-	return 0;
-}
-*/
