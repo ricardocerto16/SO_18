@@ -62,8 +62,8 @@ int execut(Array a){
 		dependencia = getDependencia(a,i);
 
 		if( dependencia == 0) {
-
-			if (fork() == 0) {
+			f = fork();
+			if (f == 0) {
 				exec_args = argsexecution(exec_args,getComando(a,i));
 				close(fd[0]);
 				dup2(fd[1],1);
@@ -92,8 +92,8 @@ int execut(Array a){
 			
 			if (i - dependencia < 0) { perror("Dependencia Inválida"); return -1;}
 
-
-			if( fork() == 0) {
+			f = fork();
+			if(f == 0) {
 
 				exec_args = argsexecution(exec_args,getComando(a,i));
 
