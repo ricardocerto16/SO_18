@@ -53,8 +53,6 @@ int execut(Array a){
 	int saida[2];
 	int status, res;
 
-
-
 	while(i < tam){
 		pipe(fd);
 		pipe(saida);
@@ -89,7 +87,10 @@ int execut(Array a){
 		}
 		else if (dependencia > 0){
 			
-			if (i - dependencia < 0) { perror("Dependencia Inválida"); return -1;}
+			if (i - dependencia < 0) { 
+				perror("Dependencia Inválida"); 
+				return -1;
+			}
 
 			f = fork();
 			if(f == 0) {
@@ -116,10 +117,8 @@ int execut(Array a){
 				write(saida[1],output,strlen(output)+1);
 				close(saida[1]);
 
-
 				wait(&status);
 				close(fd[1]);
-
 
 				int tama =0;
 				while((n = read(fd[0],buffer,2048)) > 0){
@@ -128,7 +127,6 @@ int execut(Array a){
 				buffer[tama-1]='\0';
 
 			 	insertArrayOutput(a,i,buffer);
-
 			}
 		  }
 		 i++;

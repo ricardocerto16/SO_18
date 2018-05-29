@@ -1,8 +1,6 @@
 #include "headers/parser.h"
 
 
-
-
 int readlinha(int fd, char * buffer, int nbyte){
 	int i = 0;
 
@@ -39,7 +37,6 @@ int parser(char * filename, Array a){
 
 	while((n = readlinha(fd,buffer,1024)) > 0) {
 		
-
 		if (buffer[0] == '$' && buffer[1] == '|'){
 			strcpy(cmd,buffer);
 			depends = 1;
@@ -76,11 +73,8 @@ int parser(char * filename, Array a){
 			strcpy(desc,"");
 			strcpy(cmd,"");
 		}
-
 	}
-
 	close(fd);
-
 	return 0;
 }
 
