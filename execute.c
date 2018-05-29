@@ -56,7 +56,6 @@ int execut(Array a){
 
 
 	while(i < tam){
-
 		pipe(fd);
 		pipe(saida);
 		dependencia = getDependencia(a,i);

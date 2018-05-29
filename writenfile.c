@@ -1,8 +1,5 @@
 #include "headers/writenfile.h"
 
-
-
-
 int file_writen(char * filename, Array a){
 
 	int fd, fd_out, n;
@@ -11,10 +8,12 @@ int file_writen(char * filename, Array a){
 	char * out = (char *) malloc(2048 * sizeof(char));
 	int used = getUsed(a);
 	
-	fd = open(filename, O_TRUNC | O_WRONLY);
+	fd = open(filename, O_TRUNC | O_WRONLY);		
 	//fd_out = open("output.txt", O_CREAT | O_WRONLY | O_TRUNC, 0666);
 
-	if (fd < 0 ) {perror("Erro ao escrever output no ficheiro");}
+	if (fd < 0 ) {
+		perror("Erro ao escrever output no ficheiro");
+		}
 
 	int i = 0;
 	while(i < used){ 
@@ -67,7 +66,8 @@ int main(int argc, char *argv[]){
 
 	int r = execut(a);
 
-	if (r > 0){ 	
+
+	if (r >= 0){ 	
 		file_writen(argv[1],a);
 	}
 
