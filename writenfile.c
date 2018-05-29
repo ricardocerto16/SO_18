@@ -74,5 +74,5 @@ int main(int argc, char *argv[]){
 	printstruct(a);
 	
 
-	return 1;
+	return 0;
 }
