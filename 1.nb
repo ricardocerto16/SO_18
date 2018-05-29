@@ -1,9 +1,36 @@
 Faz ls
 $ ls -l
+>>>
+total 148
+-rw-r--r-- 1 ricardo ricardo    64 Mai 25 12:14 1.nb
+-rw-rw-r-- 1 ricardo ricardo 74687 Mai  8 23:06 enunciado-so-2017-18.pdf
+-rw-rw-r-- 1 ricardo ricardo    64 Mai  5 20:42 example.nb
+-rw-rw-r-- 1 ricardo ricardo  2392 Mai 30 00:24 execute.c
+drwxrwxr-x 2 ricardo ricardo  4096 Mai 30 00:23 headers
+-rw-rw-r-- 1 ricardo ricardo   138 Mai  6 23:56 Makefile
+-rw-rw-r-- 1 ricardo ricardo  1486 Mai 30 00:32 parser.c
+-rwxrwxr-x 1 ricardo ricardo 18696 Mai 30 00:32 program
+-rw-rw-r-- 1 ricardo ricardo    61 Mai 29 21:56 README.md
+-rw-rw-r-- 1 ricardo ricardo  2422 Mai 29 22:36 struct.c
+-rw-rw-r-- 1 ricardo ricardo   562 Mai 30 00:32 teste1.nb
+-rw-rw-r-- 1 ricardo ricardo   316 Mai 30 00:32 teste2.nb
+-rw-rw-r-- 1 ricardo ricardo    50 Mai 25 12:11 teste3.nb
+-rw-rw-r-- 1 ricardo ricardo  1099 Mai 30 00:24 writenfile.c
+<<<
 Faz pwd
 $ pwd
+>>>
+/home/ricardo/Desktop/SO/SO_18
+<<<
 Faz data 
 $ date
+>>>
+Qua Mai 30 00:32:38 WEST 2018
+<<<
 Da 3
 $3| head -3
-
+>>>
+total 148
+-rw-r--r-- 1 ricardo ricardo    64 Mai 25 12:14 1.nb
+-rw-rw-r-- 1 ricardo ricardo 74687 Mai  8 23:06 enunciado-so-2017-18.pdf
+<<<

@@ -47,5 +47,5 @@ $ pwd
 Data 
 $ date
 >>>
-Ter Mai 29 22:36:12 WEST 2018
+Qua Mai 30 00:32:10 WEST 2018
 <<<

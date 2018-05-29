@@ -21,12 +21,12 @@ int readlinha(int fd, char * buffer, int nbyte){
 int parser(char * filename, Array a){
 
 	int fd, n;
-	char buffer[512];
+	char * buffer = (char *) malloc(512 * sizeof(char));;
 	fd = open(filename,O_RDONLY);
-	char cmd[256] = "";  
-	char desc[512] = "";
+	char * cmd = (char *) malloc(256 * sizeof(char));  
+	char * desc = (char *) malloc(512 * sizeof(char));;
 	int depends = 0;
-	char num[20] = "";
+	char * num = (char *) malloc(20 * sizeof(char));;
 	int i;
 	int descartar = 0;
 
