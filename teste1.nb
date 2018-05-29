@@ -44,3 +44,8 @@ $ pwd
 >>>
 /home/ricardo/Desktop/SO/SO_18
 <<<
+Data 
+$ date
+>>>
+Ter Mai 29 22:36:12 WEST 2018
+<<<

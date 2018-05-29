@@ -72,6 +72,8 @@ int main(int argc, char *argv[]){
 	}
 
 	printstruct(a);
+
+	freeStruct(a);
 	
 
 	return 0;

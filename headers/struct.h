@@ -39,4 +39,7 @@ char * getDescricao(Array a, int i);
 
 char * getOutput(Array a, int i);
 
+
+void freeStruct(Array a);
+
 #endif

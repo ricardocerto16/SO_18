@@ -36,7 +36,7 @@ Array initArray(int size){
 
 
 int insertArray(Array a, char * descricao, char * comando, int depends){
-	if( a->used == a->size){
+	if( a->used >= ((a->size)*0.7)){
 		a->cmd = realloc(a->cmd,2*(a->size)*sizeof(Comando));
 		a->size = (a->size)*2;
 	}
@@ -107,4 +107,21 @@ char * getOutput(Array a, int i){
 	char * out = malloc((strlen(o) + 1) * sizeof(char));
 	strcpy(out,a->cmd[i]->output);
 	return out;
+}
+
+void freeStruct(Array a){
+
+	int i = getUsed(a);
+	int t = 0;
+
+	while(a && t < i){
+
+		free(a->cmd[t]->descricao);
+		free(a->cmd[t]->output);
+		free(a->cmd[t]->comando);
+
+		t++;
+	}
+
+	free(a);
 }
