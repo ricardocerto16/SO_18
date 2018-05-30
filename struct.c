@@ -9,13 +9,13 @@ struct comando {
 };
 
 
-struct array{
+struct array {
 	int size;
 	int used;
 	Comando * cmd;
 };
 
-Comando initComando(){
+Comando initComando() {
 	Comando cmd = malloc(sizeof(struct comando));
 	cmd -> dependencia = 0;
 	cmd -> descricao = (char *)malloc(512 * sizeof(char));
@@ -46,19 +46,18 @@ int insertArray(Array a, char * descricao, char * comando, int depends){
 	strcpy(a->cmd[a->used]->comando,comando);
 	a->cmd[a->used]->dependencia = depends;
 	(a->used)++;
-	return 1;  
+	return 0;  
 }
 
 
 
 int insertArrayOutput(Array a, int pos ,char * output){
 	strcpy(a->cmd[pos]->output,output); 
-	return 1;
+	return 0;
 }
 
 
 void printstruct(Array a){
-
 	int i;
 
 	printf("Size : %d\n", a->size);
@@ -70,11 +69,10 @@ void printstruct(Array a){
 		printf("Nodo : %d \n", i);
 		printf("Descricao: %s\n", a->cmd[i]->descricao);
 		printf("Comando: %s\n", a->cmd[i]->comando);
-		printf("Output: %s\n", a->cmd[i]->output);
+		printf("Output: \n%s\n", a->cmd[i]->output);
 		printf("Dependencia: %d\n", a->cmd[i]->dependencia);
 		printf("-------------------------\n\n");
 	}
-
 }
 
 
@@ -114,7 +112,7 @@ void freeStruct(Array a){
 	int i = getUsed(a);
 	int t = 0;
 
-	while(a && t < i){
+	while (a && t < i) {
 
 		free(a->cmd[t]->descricao);
 		free(a->cmd[t]->output);
@@ -122,6 +120,5 @@ void freeStruct(Array a){
 
 		t++;
 	}
-
 	free(a);
 }

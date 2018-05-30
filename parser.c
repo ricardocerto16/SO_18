@@ -7,7 +7,7 @@ int readlinha(int fd, char * buffer, int nbyte){
 	while(i < nbyte-1 && read(fd, buffer + i, 1 ) >0 && buffer[i] != '\n')
         i++;
     if (i >= nbyte)
-        buffer[i] = 0;
+        buffer[i] = '\n';
     else
         buffer[i+1] = 0;
 
@@ -35,7 +35,7 @@ int parser(char * filename, Array a){
 	while((n = readlinha(fd,buffer,1024)) > 0) {
 		
 		if (buffer[0] == '$' && buffer[1] == '|'){
-			strcpy(cmd,buffer);
+			strcpy(cmd,buffer);	
 			depends = 1;
 		}
 		else if(buffer[0] == '$' && buffer[1] == ' '){
@@ -44,25 +44,25 @@ int parser(char * filename, Array a){
 		}
 		else if(buffer[0] == '$'){
 			i = 1;
-			while(isdigit(buffer[i])){
-				strcat(num,&buffer[i]);
+
+			while (isdigit(buffer[i])) {
+				strcat(num, &buffer[i]);
 				i++;
 			}
 			strcpy(cmd,buffer);
 			depends = atoi(num);
-			}
+		}
 		else {
-			if((strcmp(buffer,">>>") == 0)){
+			if ((strcmp(buffer,">>>") == 0))
 				descartar = 1;
-			}
-			else if ((strcmp(buffer,"<<<") == 0)){
+			
+			else if ((strcmp(buffer,"<<<") == 0)) {
 				descartar = 0;
 				strcpy(buffer,"");
 			}
 
-			if (descartar == 0){
+			if (descartar == 0)
 				strcpy(desc,buffer);
-			}
 		}
 
 		if( (strcmp(desc,"") !=0) && (strcmp(cmd,"") != 0)) {

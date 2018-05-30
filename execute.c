@@ -5,8 +5,10 @@ void limpaEspacos(char * t){
     int i, j=0;
     for(i=0;t[i]!='\0';i++){
         if(t[i]==' ' || t[i] == '\n');
-        else { t[j] = t[i]; 
-        	   j++;}
+        else { 
+			t[j] = t[i]; 
+        	j++;
+		}
     }
     t[j]='\0';
 }
@@ -30,7 +32,6 @@ char ** argsexecution(char **args, char * comando){
 
 	for(p=0; p < i-1; p++){
 		limpaEspacos(args[p]);
-		printf("Arg %d -> |%s| \n",p,args[p]);
 	}
 
 	return args;
@@ -110,7 +111,10 @@ int execut(Array a){
 			}
 			else {
 
-				if (f < 0) { perror("Erro no fork"); res = -1;}
+				if (f < 0) { 
+					perror("Erro no fork"); 
+					res = -1;
+				}
 
 				close(saida[0]);
 				output = getOutput(a,(i - dependencia));
@@ -121,9 +125,9 @@ int execut(Array a){
 				close(fd[1]);
 
 				int tama =0;
-				while((n = read(fd[0],buffer,2048)) > 0){
+				while((n = read(fd[0],buffer,2048)) > 0)
 					tama +=n;
-			 	}
+			 	
 				buffer[tama-1]='\0';
 
 			 	insertArrayOutput(a,i,buffer);
@@ -131,14 +135,12 @@ int execut(Array a){
 		  }
 		 i++;
 
-		 if(WIFEXITED(status)) {
+		 if (WIFEXITED(status))
 				res = WEXITSTATUS(status);
-			}
-		 else {
+	
+		 else 
 				return -1;
-			}
 		}
-
 	return res;
 }
 
