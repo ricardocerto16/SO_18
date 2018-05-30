@@ -33,7 +33,28 @@ Array initArray(int size){
 	return a;
 }
 
+/**
+ * vou deixar isto em comentário para se alguma fez quiserem perceber como dei debug 
+ * char* insertNewLineComando(char* comando){
+	int i;
+	for(i = 0; comando[i] != 0; i++){}
+	if(comando[i-1] != '\n'){
+		printf("sou o comando: %s!\n", comando);
+		comando[i] = '\n';
+		comando[i+1] = (char) malloc(sizeof(char));
+		comando[i+1] = 0;
+	}
+	return comando;
+}
+**/
 
+char* removeNewLine(char* comando){
+	int i;
+	for(i = 0; comando[i] != 0; i++)
+		if (comando[i] == '\n')
+			comando[i] = 0;
+	return comando;
+}
 
 int insertArray(Array a, char * descricao, char * comando, int depends){
 	if( a->used >= ((a->size)*0.7)){
@@ -42,13 +63,12 @@ int insertArray(Array a, char * descricao, char * comando, int depends){
 	}
 	Comando cmd = initComando();
 	a->cmd[a->used] = cmd;
-	strcpy(a->cmd[a->used]->descricao,descricao); 
-	strcpy(a->cmd[a->used]->comando,comando);
+	strcpy(a->cmd[a->used]->descricao,descricao);
+	strcpy(a->cmd[a->used]->comando,removeNewLine(comando));
 	a->cmd[a->used]->dependencia = depends;
 	(a->used)++;
 	return 0;  
 }
-
 
 
 int insertArrayOutput(Array a, int pos ,char * output){

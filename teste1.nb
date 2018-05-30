@@ -2,14 +2,17 @@ Este comando lista os ficheiros
 $ ls
 >>>
 1.nb
+Makefile
+README.md
+direito.nb
 enunciado-so-2017-18.pdf
+erro.nb
 example.nb
 execute.c
 headers
-Makefile
 parser.c
 program
-README.md
+result.txt
 struct.c
 teste1.nb
 teste2.nb
@@ -20,14 +23,17 @@ Agora podemos ordernar os ficheiros
 $| sort
 >>>
 1.nb
+Makefile
+README.md
+direito.nb
 enunciado-so-2017-18.pdf
+erro.nb
 example.nb
 execute.c
 headers
-Makefile
 parser.c
 program
-README.md
+result.txt
 struct.c
 teste1.nb
 teste2.nb
@@ -42,10 +48,10 @@ $| head -1
 Ver diretoria em que estamos
 $ pwd
 >>>
-/home/ricardo/Desktop/SO/SO_18
+/Users/adriana/Documents/uni/so/SO_18
 <<<
 Data 
 $ date
 >>>
-Qua Mai 30 18:33:26 WEST 2018
+Wed May 30 18:57:43 WEST 2018
 <<<

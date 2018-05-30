@@ -4,18 +4,16 @@
 int readlinha(int fd, char * buffer, int nbyte){
 	int i = 0;
 
-	 while(i < nbyte-1 &&
-         read(fd, buffer+i,1)>0 &&
-         buffer[i] != '\n'){
-         i++;
-    }
-    if(i>=nbyte)
-           buffer[i] = 0;
+	while(i < nbyte-1 && read(fd, buffer + i, 1 ) >0 && buffer[i] != '\n')
+        i++;
+    if (i >= nbyte)
+        buffer[i] = '\n';
     else
-           buffer[i+1] = 0;
+        buffer[i+1] = 0;
 
     return i;
 }
+
 
 int parser(char * filename, Array a){
 
@@ -71,11 +69,8 @@ int parser(char * filename, Array a){
 		    insertArray(a,desc,cmd,depends);
 			strcpy(desc,"");
 			strcpy(cmd,"");
-			strcpy(buffer,"");
 		}
 	}
-
-
 	close(fd);
 	return 0;
 }

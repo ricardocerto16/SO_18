@@ -19,15 +19,12 @@ int file_writen(char * filename, Array a){
 		if (n<0){perror("Erro write"); return 1;}
 	
 		strcpy(com, getComando(a,i));
-		if(i == (used-1)) {
-			strcat(com, "\n");
-		}
 		n = write(fd,com,strlen(com));
 
 		strcpy(out,getOutput(a,i));
 
-		if((strcmp(out,"") != 0)){
-			n = write(fd,">>>",3);
+		if(strcmp(out,"") != 0){
+			n = write(fd,"\n>>>",4);
 			n = write(fd,"\n",1);
 			n = write(fd,out,strlen(out));
 			n = write(fd,"\n",1);
@@ -45,8 +42,7 @@ int file_writen(char * filename, Array a){
 
 
 int main(int argc, char *argv[]){
-	if (argc != 2) 
-		return -1;
+	if (argc != 2) {return -1;}
 
 	Array a = initArray(5);
 
@@ -54,8 +50,9 @@ int main(int argc, char *argv[]){
 
 	int r = execut(a);
 
-	if (r >= 0)	
+	if (r >= 0){ 	
 		file_writen(argv[1],a);
+	}
 
 	printstruct(a);
 	freeStruct(a);
