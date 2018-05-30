@@ -1,6 +1,6 @@
 Faz pwd
 $ pwd
-Faz cemas 
+Faz cenas 
 $3| head
 Faz data
 $ lixo
