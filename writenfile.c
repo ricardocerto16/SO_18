@@ -2,7 +2,7 @@
 
 int file_writen(char * filename, Array a){
 
-	int fd, fd_out, n, i = 0;
+	int fd, n, i = 0;
 	char * desc = (char *) malloc(1024 * sizeof(char));
 	char * com = (char *) malloc(1024 * sizeof(char));
 	char * out = (char *) malloc(2048 * sizeof(char));
@@ -35,7 +35,6 @@ int file_writen(char * filename, Array a){
 	}
 
 	close(fd);
-	close(fd_out);
 
 	return 0;
 }
