@@ -15,10 +15,12 @@ int file_writen(char * filename, Array a){
 
 	while(i < used){ 
 		strcpy(desc, getDescricao(a,i));
+		strcat(desc, "\n");
 		n = write(fd,desc,strlen(desc));
 		if (n<0){perror("Erro write"); return 1;}
 	
 		strcpy(com, getComando(a,i));
+		strcat(com, "\n");
 		n = write(fd,com,strlen(com));
 
 		strcpy(out,getOutput(a,i));
@@ -42,7 +44,8 @@ int file_writen(char * filename, Array a){
 
 
 int main(int argc, char *argv[]){
-	if (argc != 2) {return -1;}
+	if (argc != 2) 
+		return -1;
 
 	Array a = initArray(5);
 
@@ -50,9 +53,8 @@ int main(int argc, char *argv[]){
 
 	int r = execut(a);
 
-	if (r >= 0){ 	
+	if (r >= 0)	
 		file_writen(argv[1],a);
-	}
 
 	printstruct(a);
 	freeStruct(a);

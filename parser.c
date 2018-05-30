@@ -1,18 +1,26 @@
 #include "headers/parser.h"
 
-
 int readlinha(int fd, char * buffer, int nbyte){
 	int i = 0;
+	char* p = buffer;
 
-	while(i < nbyte-1 && read(fd, buffer + i, 1 ) >0 && buffer[i] != '\n')
-        i++;
-    if (i >= nbyte)
-        buffer[i] = '\n';
-    else
-        buffer[i+1] = 0;
 
-    return i;
+	while(i < nbyte && read(fd, p + i, 1 ) > 0)  {
+		printf("i -> %s\n",p);
+		if (p[i] == '\n'){
+			buffer[i] = '\0';
+			return i + 1;
+		}
+
+		if (p[i] == '\0') {
+			return i + 1;
+		}
+
+		i++;
+	}
+	return i;
 }
+
 
 
 int parser(char * filename, Array a){
@@ -69,8 +77,12 @@ int parser(char * filename, Array a){
 		    insertArray(a,desc,cmd,depends);
 			strcpy(desc,"");
 			strcpy(cmd,"");
+			free(buffer);
+			buffer = (char *) malloc(512 * sizeof(char));;
 		}
 	}
+
+
 	close(fd);
 	return 0;
 }
