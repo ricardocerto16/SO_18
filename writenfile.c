@@ -15,12 +15,13 @@ int file_writen(char * filename, Array a){
 
 	while(i < used){ 
 		strcpy(desc, getDescricao(a,i));
-		strcat(desc, "\n");
 		n = write(fd,desc,strlen(desc));
 		if (n<0){perror("Erro write"); return 1;}
 	
 		strcpy(com, getComando(a,i));
-		strcat(com, "\n");
+		if(i == (used-1)) {
+			strcat(com, "\n");
+		}
 		n = write(fd,com,strlen(com));
 
 		strcpy(out,getOutput(a,i));
