@@ -3,14 +3,14 @@
 
 void limpaEspacos(char * t){
     int i, j=0;
-    for(i=0;t[i]!='\0';i++){
-        if(t[i]==' ' || t[i] == '\n');
+    for(i=0; t[i] != '\0'; i++){
+        if(t[i] ==' ' || t[i] == '\n');
         else { 
 			t[j] = t[i]; 
         	j++;
 		}
     }
-    t[j]='\0';
+    t[j] = '\0';
 }
 
 
@@ -21,7 +21,6 @@ char ** argsexecution(char **args, char * comando){
 	string = strtok(comando," ");
 
 	while(string != NULL){
-		
 		args[i] = string;
 		string = strtok(NULL, " ");
 		i++;
@@ -30,16 +29,11 @@ char ** argsexecution(char **args, char * comando){
 
 	args = args + 1;
 
-	for(p=0; p < i-1; p++){
+	for(p = 0; p < i - 1; p++)
 		limpaEspacos(args[p]);
-	}
-
+	
 	return args;
 }
-
-// 0 -> leitura
-// 1 -> escrita
-
 
 int execut(Array a){
 
@@ -71,9 +65,10 @@ int execut(Array a){
 				_exit(1);
 			}
 			else {
-
-				if (f < 0) { perror("Erro no fork"); return -1;}
-
+				if (f < 0) { 
+					perror("Erro no fork"); 
+					return -1;
+				}
 			 	close(fd[1]);
 				wait(&status);
 			 	int tama =0;
@@ -83,19 +78,15 @@ int execut(Array a){
 				buffer[tama-1]='\0';
 			
 			 	insertArrayOutput(a,i,buffer);
-	  		 	
 			}
 		}
 		else if (dependencia > 0){
-			
 			if (i - dependencia < 0) { 
 				perror("Dependencia Inválida"); 
 				return -1;
 			}
-
 			f = fork();
 			if(f == 0) {
-
 				exec_args = argsexecution(exec_args,getComando(a,i));
 
 				dup2(saida[0],0);
@@ -110,12 +101,10 @@ int execut(Array a){
 				_exit(1);
 			}
 			else {
-
 				if (f < 0) { 
 					perror("Erro no fork"); 
 					res = -1;
 				}
-
 				close(saida[0]);
 				output = getOutput(a,(i - dependencia));
 				write(saida[1],output,strlen(output)+1);
@@ -132,14 +121,14 @@ int execut(Array a){
 
 			 	insertArrayOutput(a,i,buffer);
 			}
-		  }
-		 i++;
+		}
+		i++;
 
-		 if (WIFEXITED(status))
-				res = WEXITSTATUS(status);
+		if (WIFEXITED(status))
+			res = WEXITSTATUS(status);
 	
-		 else 
-				return -1;
+		else 
+			return -1;
 		}
 	return res;
 }

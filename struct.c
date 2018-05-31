@@ -34,7 +34,7 @@ Array initArray(int size){
 }
 
 /**
- * vou deixar isto em comentário para se alguma fez quiserem perceber como dei debug 
+ * vou deixar isto em comentário para se alguma vez quiserem perceber como dei debug 
  * char* insertNewLineComando(char* comando){
 	int i;
 	for(i = 0; comando[i] != 0; i++){}
@@ -133,11 +133,9 @@ void freeStruct(Array a){
 	int t = 0;
 
 	while (a && t < i) {
-
 		free(a->cmd[t]->descricao);
 		free(a->cmd[t]->output);
 		free(a->cmd[t]->comando);
-
 		t++;
 	}
 	free(a);

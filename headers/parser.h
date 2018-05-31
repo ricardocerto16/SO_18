@@ -10,7 +10,6 @@
 
 int readlinha(int fd, char * buffer, int nbyte);
 
-
 int parser(char * filename, Array a);
 
 #endif
