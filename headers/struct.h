@@ -28,7 +28,10 @@ char * getDescricao(Array a, int i);
 
 char * getOutput(Array a, int i);
 
+<<<<<<< HEAD
 char* getLast(Array a);
+=======
+>>>>>>> a381b4ea21622b472aa17f328ee68762a1aa7e41
 
 void freeStruct(Array a);
 
