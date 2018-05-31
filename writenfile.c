@@ -38,9 +38,5 @@ int file_writen(char * filename, Array a){
 	}
 
 	close(fd);
-<<<<<<< HEAD
-=======
-
->>>>>>> a381b4ea21622b472aa17f328ee68762a1aa7e41
 	return 0;
 }
