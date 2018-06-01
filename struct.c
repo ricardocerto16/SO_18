@@ -33,21 +33,6 @@ Array initArray(int size){
 	return a;
 }
 
-/**
- * vou deixar isto em comentário para se alguma vez quiserem perceber como dei debug 
- * char* insertNewLineComando(char* comando){
-	int i;
-	for(i = 0; comando[i] != 0; i++){}
-	if(comando[i-1] != '\n'){
-		printf("sou o comando: %s!\n", comando);
-		comando[i] = '\n';
-		comando[i+1] = (char) malloc(sizeof(char));
-		comando[i+1] = 0;
-	}
-	return comando;
-}
-**/
-
 char* removeNewLine(char* comando){
 	int i;
 	for(i = 0; comando[i] != 0; i++)
