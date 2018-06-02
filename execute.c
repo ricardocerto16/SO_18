@@ -44,6 +44,7 @@ int execut(Array a){
 	int n;
 	char * buffer = (char *) malloc(2048 * sizeof(char));
 	char * output = (char *) malloc(2048 * sizeof(char));
+	char * resout = NULL;
 	int dependencia;
 	int saida[2];
 	int status, res;
@@ -71,26 +72,51 @@ int execut(Array a){
 				}
 			 	close(fd[1]);
 				wait(&status);
-			 	int tama =0;
-				while((n = read(fd[0],buffer,2048)) > 0){
-					tama +=n;
-			 	}
-				buffer[tama-1]='\0';
+
+				if (WIFEXITED(status)) {
+					if (WEXITSTATUS(status) == 1){
+						perror("COMANDO INVÁLIDO");
+						return -1;
+					}
+				}
+				
+				int tam = 0;
+				while((n = read(fd[0],buffer,2048)) > 0) {
+					if (resout == NULL) {
+						resout = malloc( n * sizeof(char*));
+						strncpy(resout,buffer,n);
+						tam += n;
+					}
+					else {
+						resout = realloc (resout, sizeof(resout) + n * sizeof(char*));
+						strncat(resout,buffer,n);
+						strcpy(buffer,"");
+						tam += n;
+					}
+					
+					
+				}
+				resout[tam] = '\0';
+				
+				insertArrayOutput(a,i,resout);
+			 	free (resout);
+			 	resout = NULL;
+
 			
-			 	insertArrayOutput(a,i,buffer);
 			}
 		}
+
+
 		else if (dependencia > 0){
 			if (i - dependencia < 0) { 
 				perror("Dependencia Inválida"); 
 				return -1;
 			}
+			exec_args = argsexecution(exec_args,getComando(a,i));
 			f = fork();
 			if(f == 0) {
-				exec_args = argsexecution(exec_args,getComando(a,i));
-
-				dup2(saida[0],0);
 				close(saida[1]);
+				dup2(saida[0],0);
 				close(saida[0]);
 
 				close(fd[0]);
@@ -98,6 +124,7 @@ int execut(Array a){
 				close(fd[1]);
 
 				execvp(exec_args[0],exec_args);
+
 				_exit(1);
 			}
 			else {
@@ -107,29 +134,39 @@ int execut(Array a){
 				}
 				close(saida[0]);
 				output = getOutput(a,(i - dependencia));
-				write(saida[1],output,strlen(output)+1);
+				write(saida[1],output,strlen(output));
 				close(saida[1]);
 
 				wait(&status);
 				close(fd[1]);
 
-				int tama =0;
-				while((n = read(fd[0],buffer,2048)) > 0)
-					tama +=n;
-			 	
-				buffer[tama-1]='\0';
+				if (WIFEXITED(status)){
+					if(WEXITSTATUS(status) == 1){
+						perror("COMANDO INVÁLIDO");
+						return -1;
+					}
+				}
 
-			 	insertArrayOutput(a,i,buffer);
-			}
+				int tam = 0;
+				while((n = read(fd[0],buffer,2048)) > 0) {
+					if (resout == NULL) {
+						resout = malloc( n * sizeof(char*));
+						strncpy(resout,buffer,n);
+					}
+					else {
+						resout = realloc (resout, sizeof(resout) + n * sizeof(char*));
+						strncat(resout,buffer,n);
+					}
+					tam += n;
+			 	}
+			 	resout[tam] = '\0';
+			 	insertArrayOutput(a,i,resout);
+			 	free (resout);
+			 	resout = NULL;
+				}
 		}
 		i++;
-
-		if (WIFEXITED(status))
-			res = WEXITSTATUS(status);
-	
-		else 
-			return -1;
-		}
+	}
 	return res;
 }
 

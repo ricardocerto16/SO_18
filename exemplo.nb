@@ -10,10 +10,17 @@ Mostrar o "Working directory":
 $ pwd
 Mostrar permissões e ficheiros ocultos:
 $ ls -la
+<<<<<<< HEAD
 Verificar conexões de rede:
 $ ifconfig
 Verificar modificações no repositório GIT:
 $ git status
+=======
+Mostrar periféricos do computador:
+$ lspci
+Verificar conexões de rede:
+$ ifconfig
+>>>>>>> b7607425bfc04f8f4943e9c74a9924783532debd
 Encontrar ocorrencias de "inet":
 $2| grep inet
 Ficar com os 2 primeiros da lista:
@@ -25,6 +32,10 @@ $9| sort
 Ordenar:
 $3| sort
 Encontrar o pid do nosso programa:
+<<<<<<< HEAD
 $| grep progra
+=======
+$| grep  progra
+>>>>>>> b7607425bfc04f8f4943e9c74a9924783532debd
 Contar palavras:
 $9| wc
