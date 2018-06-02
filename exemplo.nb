@@ -12,8 +12,6 @@ Mostrar permissões e ficheiros ocultos:
 $ ls -la
 Verificar conexões de rede:
 $ ifconfig
-Verificar modificações no repositório GIT:
-$ git status
 Encontrar ocorrencias de "inet":
 $| grep inet
 Ficar com os 2 primeiros da lista:

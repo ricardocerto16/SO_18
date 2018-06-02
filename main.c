@@ -3,21 +3,20 @@
 
 
 int main(int argc, char *argv[]){
-	if (argc != 2) 
-		return -1;
+	int i, r;
 
-	int i ;
+	if (argc < 2) return -1;
 
-	//for (i = 0 ; i < argc ; i++) {
-	Array a = initArray(5);
-	parser(argv[1],a);
+	for (i = 1 ; i < argc ; i++) {
+		Array a = initArray(10);
+		parser(argv[i],a);
 
-	int r = execut(a);
+		r = execut(a);
 
 	if (r >= 0)	
-		file_writen(argv[1],a);
+		file_writen(argv[i],a);
 
 	freeStruct(a);
-	//}
+	}
 	return 0;
 }

@@ -9,4 +9,4 @@ $ pwd
 Organizar os ficheiros: 
 $ ls
 cenas fixes
-$| head -1
+$5| head -1
