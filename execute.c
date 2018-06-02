@@ -14,36 +14,37 @@ void limpaEspacos(char * t){
 }
 
 
-char ** argsexecution(char **args, char * comando){
-	int i = 0, p;
-	char * string;
-
-	string = strtok(comando," ");
-
-	while(string != NULL){
-		args[i] = string;
-		string = strtok(NULL, " ");
-		i++;
-	}
-	args[i] = NULL;
-
-	args = args + 1;
-
-	for(p = 0; p < i - 1; p++)
-		limpaEspacos(args[p]);
-	
-	return args;
+char ** argsexecution(char * comando){
+ 	int i = 0, p;
+ 	char * string;
+ 	char** args = (char**) malloc(50 * sizeof(char *));
+ 
+ 	string = strtok(comando," ");
+ 
+ 	while(string != NULL){
+ 		args[i] = string;
+ 		string = strtok(NULL, " ");
+ 		i++;
+ 	}
+ 	args[i] = NULL;
+ 
+ 	args = args + 1;
+ 
+ 	for(p = 0; p < i - 1; p++)
+ 		limpaEspacos(args[p]);
+ 	
+ 	return args;
 }
 
 int execut(Array a){
 
 	int i = 0 , f;
 	int tam = getUsed(a);
-	char ** exec_args = (char**) malloc(tam*sizeof(char *));
+	char ** exec_args;
 	int fd[2];
 	int n;
 	char * buffer = (char *) malloc(2048 * sizeof(char));
-	char * output = (char *) malloc(2048 * sizeof(char));
+	char * output = NULL;
 	char * resout = NULL;
 	int dependencia;
 	int saida[2];
@@ -55,9 +56,11 @@ int execut(Array a){
 		dependencia = getDependencia(a,i);
 
 		if( dependencia == 0) {
+
+			exec_args = argsexecution(getComando(a,i));
+
 			f = fork();
 			if (f == 0) {
-				exec_args = argsexecution(exec_args,getComando(a,i));
 				close(fd[0]);
 				dup2(fd[1],1);
 				close(fd[1]);
@@ -93,26 +96,23 @@ int execut(Array a){
 						strcpy(buffer,"");
 						tam += n;
 					}
-					
-					
 				}
 				resout[tam] = '\0';
 				
 				insertArrayOutput(a,i,resout);
 			 	free (resout);
 			 	resout = NULL;
-
-			
 			}
 		}
-
 
 		else if (dependencia > 0){
 			if (i - dependencia < 0) { 
 				perror("Dependencia Inválida"); 
 				return -1;
 			}
-			exec_args = argsexecution(exec_args,getComando(a,i));
+
+			exec_args = argsexecution(getComando(a,i));
+	
 			f = fork();
 			if(f == 0) {
 				close(saida[1]);
@@ -130,7 +130,7 @@ int execut(Array a){
 			else {
 				if (f < 0) { 
 					perror("Erro no fork"); 
-					res = -1;
+					return -1;
 				}
 				close(saida[0]);
 				output = getOutput(a,(i - dependencia));
@@ -159,10 +159,12 @@ int execut(Array a){
 					}
 					tam += n;
 			 	}
+
 			 	resout[tam] = '\0';
 			 	insertArrayOutput(a,i,resout);
 			 	free (resout);
 			 	resout = NULL;
+
 				}
 		}
 		i++;

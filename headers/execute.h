@@ -10,7 +10,7 @@
 
 void limpaEspacos(char * t);
 
-char ** argsexecution(char **args, char * comando);
+char ** argsexecution(char * comando);
 
 int execut(Array a);
 
