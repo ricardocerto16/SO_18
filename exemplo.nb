@@ -10,10 +10,6 @@ Mostrar o "Working directory":
 $ pwd
 Mostrar permissões e ficheiros ocultos:
 $ ls -la
-Verificar conexões de rede:
-$ ifconfig
-Encontrar ocorrencias de "inet":
-$| grep inet
 Ficar com os 2 primeiros da lista:
 $4| head -2
 Contar palavras:
@@ -22,3 +18,7 @@ Ordenar:
 $3| sort
 Contar palavras:
 $9| wc
+Date
+$ date
+ps ps 
+$ ps
