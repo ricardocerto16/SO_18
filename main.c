@@ -10,10 +10,7 @@ int main(int argc, char *argv[]){
 
 	if (argc < 2) return -1;
 
-	for (i = 0 ; i < argc ; ++i) {
-
-		f = fork();
-		if (f == 0) {
+	for (i = 1 ; i < argc ; i++) {
 			a = initArray(10);
 			parser(argv[i],a);
 
@@ -23,11 +20,8 @@ int main(int argc, char *argv[]){
 				file_writen(argv[i],a);
 			
 			freeStruct(a);
-		}
+		
 	}
-
-	for (i = 0 ; i < argc ; ++i) 
-		wait(NULL);
 
 	return 0;
 }
