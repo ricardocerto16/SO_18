@@ -1,6 +1,0 @@
-Faz pwd
-$ pwd
-Faz cenas 
-$3| head
-Faz data
-$ lixo
