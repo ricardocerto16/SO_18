@@ -72,6 +72,12 @@ int execut(Array a){
 				}
 			 	close(fd[1]);
 				wait(&status);
+
+				if (WIFEXITED(status)) {
+					if (WEXITSTATUS(status) == 1)
+						return -1;
+				}
+
 				while((n = read(fd[0],buffer,2048)) > 0) {
 					if (resout == NULL) {
 						resout = malloc( n * sizeof(char*));
@@ -81,12 +87,15 @@ int execut(Array a){
 						resout = realloc (resout, sizeof(resout) + n * sizeof(char*));
 						strncat(resout,buffer,n);
 					}
-			 	}
-			 	insertArrayOutput(a,i,resout);
+				}
+				insertArrayOutput(a,i,resout);
 			 	free (resout);
 			 	resout = NULL;
+			
 			}
 		}
+
+
 		else if (dependencia > 0){
 			if (i - dependencia < 0) { 
 				perror("Dependencia Inválida"); 
@@ -120,6 +129,11 @@ int execut(Array a){
 				wait(&status);
 				close(fd[1]);
 
+				if (WIFEXITED(status)){
+					if(WEXITSTATUS(status) == 1)
+						return -1;
+				}
+
 				while((n = read(fd[0],buffer,2048)) > 0) {
 					if (resout == NULL) {
 						resout = malloc( n * sizeof(char*));
@@ -133,16 +147,10 @@ int execut(Array a){
 			 	insertArrayOutput(a,i,resout);
 			 	free (resout);
 			 	resout = NULL;
-			}
+				}
 		}
 		i++;
-
-		if (WIFEXITED(status))
-			res = WEXITSTATUS(status);
-	
-		else 
-			return -1;
-		}
+	}
 	return res;
 }
 

@@ -1,10 +1,12 @@
 Este comando lista os ficheiros
 $ ls
-Datas
-$| date
+Agora podemos ordernar os ficheiros
+$| sort
 E escolher o primeiro
-$2| head -4
+$2| head -1
 Ver diretoria em que estamos
 $ pwd
-Organizar os ficheiros: 
-$ lsfdsf
+Data 
+$ ps
+Header
+$1| head -2
