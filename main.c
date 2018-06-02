@@ -8,6 +8,7 @@ int main(int argc, char *argv[]){
 
 	Array a = initArray(5);
 	parser(argv[1],a);
+
 	int r = execut(a);
 
 	if (r >= 0)	

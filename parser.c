@@ -4,21 +4,22 @@
 int readlinha(int fd, char * buffer, int nbyte){
 	int i = 0;
 
-	while(i < nbyte-1 && read(fd, buffer + i, 1 ) >0 && buffer[i] != '\n')
+	while(i < nbyte-1 && read(fd, buffer + i, 1 ) > 0 && buffer[i] != '\n')
         i++;
     if (i >= nbyte)
         buffer[i] = '\n';
     else
-        buffer[i+1] = 0;
+        buffer[i] = '\0';
 
     return i;
 }
 
 
+
 int parser(char * filename, Array a){
 
 	int fd, n;
-	char * buffer = (char *) malloc(512 * sizeof(char));;
+	char * buffer = (char *) malloc(1024 * sizeof(char));;
 	fd = open(filename,O_RDONLY);
 	char * cmd = (char *) malloc(256 * sizeof(char));  
 	char * desc = (char *) malloc(512 * sizeof(char));;
@@ -46,11 +47,12 @@ int parser(char * filename, Array a){
 			i = 1;
 
 			while (isdigit(buffer[i])) {
-				strcat(num, &buffer[i]);
+				sprintf(num,"%s%c",num,buffer[i]);
 				i++;
 			}
 			strcpy(cmd,buffer);
 			depends = atoi(num);
+			num[0] = '\0';
 		}
 		else {
 			if ((strcmp(buffer,">>>") == 0))

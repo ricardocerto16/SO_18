@@ -1,53 +1,10 @@
 Este comando lista os ficheiros
 $ ls
->>>
-1.nb
-Makefile
-README.md
-enunciado-so-2017-18.pdf
-example.nb
-execute.c
-headers
-main.c
-parser.c
-program
-struct.c
-teste1.nb
-teste2.nb
-teste3.nb
-writenfile.c
-<<<
-Agora podemos ordernar os ficheiros
-$| sort
->>>
-1.nb
-Makefile
-README.md
-enunciado-so-2017-18.pdf
-example.nb
-execute.c
-headers
-main.c
-parser.c
-program
-struct.c
-teste1.nb
-teste2.nb
-teste3.nb
-writenfile.c
-<<<
+Datas
+$| date
 E escolher o primeiro
-$| head -1
->>>
-1.nb
-<<<
+$2| head -4
 Ver diretoria em que estamos
 $ pwd
->>>
-/Users/adriana/Documents/uni/so/SO_18
-<<<
-Data 
-$ date
->>>
-Thu May 31 18:14:28 WEST 2018
-<<<
+Organizar os ficheiros: 
+$4| sort

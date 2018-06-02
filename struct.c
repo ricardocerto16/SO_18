@@ -57,9 +57,11 @@ int insertArray(Array a, char * descricao, char * comando, int depends){
 
 
 int insertArrayOutput(Array a, int pos ,char * output){
-	strcpy(a->cmd[pos]->output,output); 
+	char* out = strdup(output);
+	strcpy(a->cmd[pos]->output,out);
 	return 0;
 }
+
 
 
 void printstruct(Array a){
@@ -80,7 +82,6 @@ void printstruct(Array a){
 	}
 }
 
-
 int getDependencia(Array a, int i){
 	return a->cmd[i]->dependencia;
 }
@@ -100,15 +101,15 @@ char * getComando(Array a, int i){
 
 char * getDescricao(Array a, int i){
 	char* d = a->cmd[i]->descricao;
-	char * des = malloc((strlen(d) + 1) * sizeof(char));
-	strcpy(des,a->cmd[i]->descricao);
-	return des;
+	char* desc = malloc((strlen(d) + 1) * sizeof(char));
+	strcpy(desc, a->cmd[i]->descricao);
+	return desc;
 }
 
 char * getOutput(Array a, int i){
 	char* o = a->cmd[i]->output;
-	char * out = malloc((strlen(o) + 1) * sizeof(char));
-	strcpy(out,a->cmd[i]->output);
+	char* out = malloc((strlen(o) + 1) * sizeof(char));
+	strcpy(out, a->cmd[i]->output);
 	return out;
 }
 
