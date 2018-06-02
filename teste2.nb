@@ -1,6 +1,12 @@
 Este comando lista os ficheiros
 $ ls
-Ver diretoria em que estamos
+Agora podemos ordernar os ficheiros
+$| sort
+E escolher o primeiro
+$2| head -3
+Data 
 $ pwd
-Data
-$ date
+Header
+$ ps
+fixe
+$| head -2
