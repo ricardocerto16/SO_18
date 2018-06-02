@@ -1,5 +1,7 @@
 #include "headers/execute.h"
 #include "headers/writenfile.h"
+#include <signal.h>
+
 
 
 int main(int argc, char *argv[]){
@@ -22,8 +24,10 @@ int main(int argc, char *argv[]){
 			
 			freeStruct(a);
 		}
-		else 
-			wait(0);
 	}
+
+	for (i = 0 ; i < argc ; ++i) 
+		wait(NULL);
+
 	return 0;
 }

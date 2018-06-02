@@ -1,24 +1,154 @@
 Este comando lista os ficheiros:
 $ ls
+>>>
+Makefile
+README.md
+execute.c
+exemplo.nb
+headers
+main.c
+notebook
+parser.c
+struct.c
+teste1.nb
+writenfile.c
+<<<
 Agora podemos ordenar estes ficheiros:
 $| sort
+>>>
+Makefile
+README.md
+execute.c
+exemplo.nb
+headers
+main.c
+notebook
+parser.c
+struct.c
+teste1.nb
+writenfile.c
+<<<
 E escolher o primeiro:
 $| head -3
+>>>
+Makefile
+README.md
+execute.c
+<<<
 Mostrar processos em execução:
 $ ps
+>>>
+  PID TTY           TIME CMD
+ 3004 ttys000    0:00.03 /Applications/iTerm.app/Contents/MacOS/iTerm2 --server /usr/bin/login -fpl adriana /Applications/iTerm.app/Contents/MacOS/iTerm2 --launch_shell
+ 3006 ttys000    0:02.64 -zsh
+ 4721 ttys000    0:00.00 ./notebook teste1.nb exemplo.nb
+ 4722 ttys000    0:00.02 ./notebook teste1.nb exemplo.nb
+ 4723 ttys000    0:00.00 ./notebook teste1.nb exemplo.nb
+ 4724 ttys000    0:00.00 (notebook)
+ 4732 ttys000    0:00.00 ./notebook teste1.nb exemplo.nb
+ 4734 ttys000    0:00.00 ./notebook teste1.nb exemplo.nb
+ 4737 ttys000    0:00.00 ./notebook teste1.nb exemplo.nb
+ 4748 ttys000    0:00.00 ./notebook teste1.nb exemplo.nb
+ 4753 ttys000    0:00.00 (ls)
+<<<
 Mostrar o "Working directory":
 $ pwd
+>>>
+/Users/adriana/Documents/uni/so/SO_18
+<<<
 Mostrar permissões e ficheiros ocultos:
 $ ls -la
+>>>
+total 72
+drwxr-xr-x  14 adriana  staff   448 Jun  2 23:19 .
+drwxr-xr-x  10 adriana  staff   320 Jun  1 18:06 ..
+drwxr-xr-x  15 adriana  staff   480 Jun  2 23:19 .git
+-rwxr-xr-x   1 adriana  staff   147 Jun  2 18:56 Makefile
+-rwxr-xr-x   1 adriana  staff   203 May 30 19:20 README.md
+-rwxr-xr-x   1 adriana  staff  3084 Jun  2 21:33 execute.c
+-rw-r--r--   1 adriana  staff   442 Jun  2 23:19 exemplo.nb
+drwxr-xr-x@  6 adriana  staff   192 Jun  2 14:04 headers
+-rw-r--r--   1 adriana  staff   429 Jun  2 23:19 main.c
+-rwxr-xr-x   1 adriana  staff     0 Jun  2 23:19 notebook
+-rwxr-xr-x   1 adriana  staff  1494 Jun  2 20:27 parser.c
+-rwxr-xr-x   1 adriana  staff  2606 Jun  2 20:27 struct.c
+-rwxr-xr-x   1 adriana  staff   335 Jun  2 23:19 teste1.nb
+-rwxr-xr-x   1 adriana  staff   800 Jun  2 20:27 writenfile.c
+<<<
+Verificar conexões de rede:
+$ ifconfig
+>>>
+lo0: flags=8049<UP,LOOPBACK,RUNNING,MULTICAST> mtu 16384
+	options=1203<RXCSUM,TXCSUM,TXSTATUS,SW_TIMESTAMP>
+	inet 127.0.0.1 netmask 0xff000000 
+	inet6 ::1 prefixlen 128 
+	inet6 fe80::1%lo0 prefixlen 64 scopeid 0x1 
+	nd6 options=201<PERFORMNUD,DAD>
+gif0: flags=8010<POINTOPOINT,MULTICAST> mtu 1280
+stf0: flags=0<> mtu 1280
+XHC20: flags=0<> mtu 0
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	ether f4:5c:89:8d:3c:9d 
+	inet6 fe80::ce6:d196:dfca:3e2e%en0 prefixlen 64 secured scopeid 0x5 
+	inet 192.168.1.78 netmask 0xffffff00 broadcast 192.168.1.255
+	inet6 2001:8a0:ff7a:ff01:189c:6be4:f453:247a prefixlen 64 autoconf secured 
+	inet6 2001:8a0:ff7a:ff01:e006:2e14:49cf:86e9 prefixlen 64 autoconf temporary 
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+p2p0: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> mtu 2304
+	ether 06:5c:89:8d:3c:9d 
+	media: autoselect
+	status: inactive
+awdl0: flags=8943<UP,BROADCAST,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1484
+	ether e2:d4:dc:1a:2b:	inet 127.0.0.1 netmask 0xff000000 
+	inet6 ::1 prefixlen 128 
+	inet6 fe80::1%lo0 prefixlen 64 scopeid 0x1 
+	inet6 fe80::ce6:d196:dfca:3e2e%en0 prefixlen 64 secured scopeid 0x5 
+	inet 192.168.1.78 netmask 0xffffff00 broadcast 192.168.1.255
+	inet6 2001:8a0:ff7a:ff01:189c:6be4:f453:247a prefixlen 64 autoconf secured 
+	inet6 2001:8a0:ff7a:ff01:e006:2e14:49cf:86e9 prefixlen 64 autoconf temporary 
+	inet6 fe80::e0d4:dcff:fe1a:2bf3%awdl0 prefixlen 64 scopeid 0x7 
+	inet6 fe80::9684:3cdb:122c:1581%utun0 prefixlen 64 scopeid 0xb 
+<<<
+Encontrar ocorrencias de "inet":
+$| grep inet
+>>>
+	inet 127.0.0.1 netmask 0xff000000 
+	inet6 ::1 prefixlen 128 
+	inet6 fe80::1%lo0 prefixlen 64 scopeid 0x1 
+	inet6 fe80::ce6:d196:dfca:3e2e%en0 prefixlen 64 secured scopeid 0x5 
+	inet 192.168.1.78 netmask 0xffffff00 broadcast 192.168.1.255
+	inet6 2001:8a0:ff7a:ff01:189c:6be4:f453:247a prefixlen 64 autoconf secured 
+	inet6 2001:8a0:ff7a:ff01:e006:2e14:49cf:86e9 prefixlen 64 autoconf temporary 
+	inet6 fe80::e0d4:dcff:fe1a:2bf3%awdl0 prefixlen 64 scopeid 0x7 
+	inet6 fe80::9684:3cdb:122c:1581%utun0 prefixlen 64 scopeid 0xb 
+<<<
 Ficar com os 2 primeiros da lista:
 $4| head -2
+>>>
+/Users/adriana/Documents/uni/so/SO_18
+<<<
 Contar palavras:
 $4| wc
+>>>
+      15     128     810
+<<<
 Ordenar:
 $3| sort
+>>>
+	inet 127.0.0.1 netmask 0xff000000 
+	inet 192.168.1.78 netmask 0xffffff00 broadcast 192.168.1.255
+	inet6 2001:8a0:ff7a:ff01:189c:6be4:f453:247a prefixlen 64 autoconf secured 
+	inet6 2001:8a0:ff7a:ff01:e006:2e14:49cf:86e9 prefixlen 64 autoconf temporary 
+	inet6 ::1 prefixlen 128 
+	inet6 fe80::1%lo0 prefixlen 64 scopeid 0x1 
+	inet6 fe80::9684:3cdb:122c:1581%utun0 prefixlen 64 scopeid 0xb 
+	inet6 fe80::ce6:d196:dfca:3e2e%en0 prefixlen 64 secured scopeid 0x5 
+	inet6 fe80::e0d4:dcff:fe1a:2bf3%awdl0 prefixlen 64 scopeid 0x7 
+<<<
 Contar palavras:
 $9| wc
-Date
-$ date
-ps ps 
-$ ps
+>>>
+       3       3      29
+<<<

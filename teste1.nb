@@ -1,8 +1,32 @@
 Este comando lista os ficheiros
 $ ls
+>>>
+Makefile
+README.md
+execute.c
+exemplo.nb
+headers
+main.c
+notebook
+parser.c
+struct.c
+teste1.nb
+writenfile.c
+<<<
 E escolher os 3 primeiros
 $| head -3
+>>>
+Makefile
+README.md
+execute.c
+<<<
 Ver a data atual
 $ Date
+>>>
+Sat Jun  2 23:19:54 WEST 2018
+<<<
 Ultimo ficheiro
 $3| tail -1
+>>>
+writenfile.c
+<<<
