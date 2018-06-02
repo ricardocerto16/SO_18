@@ -1,12 +1,8 @@
 Este comando lista os ficheiros
 $ ls
-Datas
-$ date
-E escolher o primeiro
-$2| head -4
-Ver diretoria em que estamos
-$ pwd
-Organizar os ficheiros: 
-$ ls
-cenas fixes
-$5| head -1
+E escolher os 3 primeiros
+$| head -3
+Ver a data atual
+$ Date
+Ultimo ficheiro
+$3| tail -1

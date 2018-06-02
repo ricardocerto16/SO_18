@@ -3,25 +3,27 @@
 
 
 int main(int argc, char *argv[]){
-	int i, r;
+	int i, r, f;
 	Array a;
-	char* res = "EXECUÇÃO BEM SUCEDIDA DO FICHEIRO ";
 
 	if (argc < 2) return -1;
 
-	for (i = 1 ; i < argc ; i++) {
-		a = initArray(10);
-		parser(argv[i],a);
+	for (i = 0 ; i < argc ; ++i) {
 
-		r = execut(a);
+		f = fork();
+		if (f == 0) {
+			a = initArray(10);
+			parser(argv[i],a);
 
-		if (r >= 0)	{
-			file_writen(argv[i],a);
-			printf("FICHEIRO ESCRITO COM SUCESSO -> %s\n", argv[i]);
+			r = execut(a);
+
+			if (r >= 0)	
+				file_writen(argv[i],a);
+			
+			freeStruct(a);
 		}
 		else 
-			printf("FALHA NA EXECUÇÃO DO FICHEIRO -> %s\n", argv[i]);
+			wait(0);
 	}
-	freeStruct(a);
 	return 0;
 }
