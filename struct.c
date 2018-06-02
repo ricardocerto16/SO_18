@@ -20,7 +20,7 @@ Comando initComando() {
 	cmd -> dependencia = 0;
 	cmd -> descricao = (char *)malloc(512 * sizeof(char));
 	cmd -> comando = (char *)malloc(512 * sizeof(char));
-	cmd -> output = (char *)malloc(1024 * sizeof(char));
+	cmd -> output = NULL;
 	return cmd;
 }
 
@@ -57,6 +57,8 @@ int insertArray(Array a, char * descricao, char * comando, int depends){
 
 
 int insertArrayOutput(Array a, int pos ,char * output){
+	char* aux = malloc(strlen(output) + 1);
+	a->cmd[pos]->output = aux;
 	strcpy(a->cmd[pos]->output,output); 
 	return 0;
 }
@@ -118,9 +120,12 @@ void freeStruct(Array a){
 	int t = 0;
 
 	while (a && t < i) {
-		free(a->cmd[t]->descricao);
-		free(a->cmd[t]->output);
-		free(a->cmd[t]->comando);
+		if (a->cmd[t]->descricao)
+			free(a->cmd[t]->descricao);
+		if (a->cmd[t]->output)
+			free(a->cmd[t]->output);
+		if (a->cmd[t]->comando)
+			free(a->cmd[t]->comando);
 		t++;
 	}
 	free(a);

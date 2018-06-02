@@ -4,13 +4,13 @@
 int readlinha(int fd, char * buffer, int nbyte){
 	int i = 0;
 
-	while(i < nbyte-1 && read(fd, buffer + i, 1 ) >0 && buffer[i] != '\n')
+	while(i < nbyte-1 && read(fd, buffer + i, 1 ) >0 && buffer[i] != '\n' && buffer[i] != '\0')
         i++;
     if (i >= nbyte)
         buffer[i] = '\n';
-    else
+    else 
         buffer[i+1] = 0;
-
+	
     return i;
 }
 
@@ -18,12 +18,12 @@ int readlinha(int fd, char * buffer, int nbyte){
 int parser(char * filename, Array a){
 
 	int fd, n;
-	char * buffer = (char *) malloc(512 * sizeof(char));;
+	char * buffer = (char *) malloc(512 * sizeof(char));
 	fd = open(filename,O_RDONLY);
 	char * cmd = (char *) malloc(256 * sizeof(char));  
-	char * desc = (char *) malloc(512 * sizeof(char));;
+	char * desc = (char *) malloc(512 * sizeof(char));
 	int depends = 0;
-	char * num = (char *) malloc(20 * sizeof(char));;
+	char * num = (char *) malloc(20 * sizeof(char));
 	int i;
 	int descartar = 0;
 
@@ -33,7 +33,6 @@ int parser(char * filename, Array a){
 	}
 
 	while((n = readlinha(fd,buffer,1024)) > 0) {
-		
 		if (buffer[0] == '$' && buffer[1] == '|'){
 			strcpy(cmd,buffer);	
 			depends = 1;
@@ -55,8 +54,8 @@ int parser(char * filename, Array a){
 		else {
 			if ((strcmp(buffer,">>>") == 0))
 				descartar = 1;
-			
-			else if ((strcmp(buffer,"<<<") == 0)) {
+
+			else if ((strcmp(buffer,"<<<") == 0) && (strlen(buffer) == 3)) {
 				descartar = 0;
 				strcpy(buffer,"");
 			}
@@ -65,7 +64,7 @@ int parser(char * filename, Array a){
 				strcpy(desc,buffer);
 		}
 
-		if( (strcmp(desc,"") !=0) && (strcmp(cmd,"") != 0)) {
+		if((strcmp(desc,"") !=0) && (strcmp(cmd,"") != 0)) {
 		    insertArray(a,desc,cmd,depends);
 			strcpy(desc,"");
 			strcpy(cmd,"");

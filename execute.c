@@ -14,9 +14,10 @@ void limpaEspacos(char * t){
 }
 
 
-char ** argsexecution(char **args, char * comando){
+char ** argsexecution(char * comando){
 	int i = 0, p;
 	char * string;
+	char ** args = (char**) malloc(30 *sizeof(char *));
 
 	string = strtok(comando," ");
 
@@ -39,11 +40,11 @@ int execut(Array a){
 
 	int i = 0 , f;
 	int tam = getUsed(a);
-	char ** exec_args = (char**) malloc(tam*sizeof(char *));
+	char ** exec_args;
 	int fd[2];
-	int n;
-	char * buffer = (char *) malloc(2048 * sizeof(char));
+	int n, r = 0, x = 0;
 	char * output = (char *) malloc(2048 * sizeof(char));
+	char * buffer = (char *) malloc(2048 * sizeof(char));
 	int dependencia;
 	int saida[2];
 	int status, res;
@@ -56,12 +57,14 @@ int execut(Array a){
 		if( dependencia == 0) {
 			f = fork();
 			if (f == 0) {
-				exec_args = argsexecution(exec_args,getComando(a,i));
+				exec_args = argsexecution(getComando(a,i));
+
 				close(fd[0]);
 				dup2(fd[1],1);
 				close(fd[1]);
-			
+
 				execvp(exec_args[0],exec_args);
+				perror("1. Erro a executar o comando");
 				_exit(1);
 			}
 			else {
@@ -73,7 +76,11 @@ int execut(Array a){
 				wait(&status);
 			 	int tama =0;
 				while((n = read(fd[0],buffer,2048)) > 0){
-					tama +=n;
+					if (n == 2048) {
+						buffer = realloc(buffer, r * 2048);
+						r ++;
+					}
+					tama += n;
 			 	}
 				buffer[tama-1]='\0';
 			
@@ -87,7 +94,7 @@ int execut(Array a){
 			}
 			f = fork();
 			if(f == 0) {
-				exec_args = argsexecution(exec_args,getComando(a,i));
+				exec_args = argsexecution(getComando(a,i));
 
 				dup2(saida[0],0);
 				close(saida[1]);
@@ -98,6 +105,7 @@ int execut(Array a){
 				close(fd[1]);
 
 				execvp(exec_args[0],exec_args);
+				perror("Erro a executar o comando");
 				_exit(1);
 			}
 			else {
@@ -114,8 +122,13 @@ int execut(Array a){
 				close(fd[1]);
 
 				int tama =0;
-				while((n = read(fd[0],buffer,2048)) > 0)
+				while((n = read(fd[0],buffer,2048)) > 0) {
+					if (n == 2048) {
+						buffer = realloc(buffer, r * 2048);
+						r ++;
+					}
 					tama +=n;
+				}
 			 	
 				buffer[tama-1]='\0';
 
